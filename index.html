@@ -30,10 +30,45 @@
 
 
     <br>
-    <span style="color: rgb(0, 0, 0); font-size: 20px; font-family: Verdana, Geneva, Tahoma, sans-serif">
-    <u> Osobní informace   </u> <br>
-   bolí mě z toho hlava ahhhhh </span>
+     <body>
+    <marquee behavior="scroll" direction="left">
+       // elina smrdi    // elina smrdi    // elina smrdi    // elina smrdi    // elina smrdi    // elina smrdi    // elina smrdi //
+    </marquee>
+  </body>
 
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script>
+        async function sendToDiscord() {
+            const text = document.getElementById('inputText').value;
+            const webhookUrl = 'https://discordapp.com/api/webhooks/1249422385002582106/vUzhLpuDingHRfyFij-Z9dpBUvV3dTq_dsCinSlQojLr3d5QDO8khHSFtyTKmV5Al0pd';
+
+            const payload = {
+                content: text
+            };
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+              
+            } catch (error) {
+                console.error('Error sending message:', error);
+                alert('hmmmmm');
+            }
+        }
+    </script>
+</head>
+<body>
+    <textarea id="inputText" rows="4" cols="50" placeholder="NATY CICICICI"></textarea><br>
+    <button onclick="sendToDiscord()">👀</button>
+</body>
 
 
 

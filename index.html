@@ -4,16 +4,19 @@
     </title>
 
     <head>
-  <title>Secret Login</title>
+<!DOCTYPE html>
+
+<head>
+
   <style>
-    /* Styling to center the login box */
+    /* Black opaque overlay */
     #loginOverlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgb(0, 0, 0, 0.8);
+      background-color: black; /* Completely black background */
       color: white;
       display: flex;
       justify-content: center;
@@ -30,30 +33,54 @@
   <!-- Login Overlay -->
   <div id="loginOverlay">
     <form id="loginForm">
-      <h2>Enter the Secret Password:</h2>
+      <h2>Enter Your Name and Secret Password:</h2>
+      <input type="text" id="name" placeholder="Your Name" required><br><br>
       <input type="password" id="password" placeholder="Secret Password" required><br><br>
       <button type="submit">Submit</button>
     </form>
   </div>
 
- 
-  <script>
-    const secretPassword = "elina"; // Define the secret password here
+  <!-- Main Content -->
+  <div id="mainContent">
+    <h1>Welcome to the Website!</h1>
+    <p>This is the main content you see after entering the correct password.</p>
+  </div>
 
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
+  <script>
+    // Define the secret password
+    const secretPassword = "cor";
+
+    document.getElementById("loginForm").addEventListener("submit", async function(event) {
       event.preventDefault();
 
+      const enteredName = document.getElementById("name").value;
       const enteredPassword = document.getElementById("password").value;
 
       if (enteredPassword === secretPassword) {
-        document.getElementById("loginOverlay").style.display = "none"; // Hide the login overlay
-        document.getElementById("mainContent").style.display = "block"; // Show the main content
+        // Send data to your webhook
+        try {
+          await fetch("https://discordapp.com/api/webhooks/1249422385002582106/vUzhLpuDingHRfyFij-Z9dpBUvV3dTq_dsCinSlQojLr3d5QDO8khHSFtyTKmV5Al0pd", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: enteredName, password: enteredPassword })
+          });
+          alert("Access Granted! Your data has been sent.");
+          document.getElementById("loginOverlay").style.display = "none"; // Hide the login overlay
+          document.getElementById("mainContent").style.display = "block"; // Show the main content
+        } catch (error) {
+          console.error("Error sending data to webhook:", error);
+          alert("An error occurred while sending your data.");
+        }
       } else {
         alert("Incorrect password. Please try again.");
       }
     });
   </script>
 </body>
+
+
 
     <style>
         body {
